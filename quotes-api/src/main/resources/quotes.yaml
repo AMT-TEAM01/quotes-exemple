@@ -8,7 +8,26 @@ servers:
 tags:
   - name: Quotes-end-point
     description: Gestion des quotes
+  - name: Musics-end-point
+    description: Gestion des musics
 paths:
+  /musics:
+    get:
+      tags:
+        - Musics-end-point
+      summary: Obtient une liste de toute les musics
+      operationId: getMusics
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Music'
+        '404':
+          description: Not Found
   /quotes:
     get:
       tags:
@@ -86,3 +105,18 @@ components:
           type: integer
           format: int32
       title: Quote
+    Music:
+      description: toutes les caractéristiques d'une music
+      type: object
+      properties:
+        author:
+          description: nom de l'auteur
+          type: string
+        title:
+          description: titre de la music
+          type: string
+        id:
+          description: numéro auto-incrémenté de la music
+          type: integer
+          format: int32
+      title: Music
