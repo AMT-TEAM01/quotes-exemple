@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+//table user, author creators many to many, artist
+//table playlist
+//patch change ordre playlist
+
 @RestController
 public class MusicsEndPoint implements MusicsApi {
     @Autowired

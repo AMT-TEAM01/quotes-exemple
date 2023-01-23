@@ -14,8 +14,8 @@ public class OpenApiDocumentationConfig {
     @Bean
     public OpenAPI springQuotesOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Quotes API")
-                        .description("Quotes sample application")
+                .info(new Info().title("Musics API")
+                        .description("Musics sample application")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0")
                                 .url("https://www.apache.org/licenses/LICENSE-2.0.html")));
