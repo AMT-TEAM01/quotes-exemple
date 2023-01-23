@@ -1,12 +1,18 @@
 package ch.heig.quotes.api.entities;
 
 import jakarta.persistence.*;
+import org.openapitools.model.Playlist;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity(name = "Music")
 @Table(name = "musics")
 public class MusicEntity {
     @TableGenerator(name = "genMusics",
-            table = "idMusicss",
+            table = "idMusics",
             pkColumnName = "name",
             valueColumnName = "val",
             initialValue = 3,
@@ -16,6 +22,9 @@ public class MusicEntity {
     private int id;
     private String author;
     private String title;
+
+    @ManyToMany(mappedBy = "musicsEntities")
+    private List<PlaylistEntity> playlistsEntities = new ArrayList<>();
 
     public MusicEntity() {}
 

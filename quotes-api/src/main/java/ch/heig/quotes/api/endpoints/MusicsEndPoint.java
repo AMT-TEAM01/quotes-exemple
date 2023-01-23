@@ -28,11 +28,11 @@ public class MusicsEndPoint implements MusicsApi {
     public ResponseEntity<List<Music>> getMusics() {
         List<MusicEntity> musicEntities= musicRepository.findAll();
         List<Music> musics  = new ArrayList<>();
-        for (MusicEntity quoteEntity : musicEntities) {
+        for (MusicEntity musicEntity : musicEntities) {
             Music music = new Music();
-            music.setId(quoteEntity.getId());
-            music.setAuthor(quoteEntity.getAuthor());
-            music.setTitle(quoteEntity.getTitle());
+            music.setId(musicEntity.getId());
+            music.setAuthor(musicEntity.getAuthor());
+            music.setTitle(musicEntity.getTitle());
             musics.add(music);
         }
         return new ResponseEntity<List<Music>>(musics, HttpStatus.OK);

@@ -1,4 +1,13 @@
-insert into quotes values (1,'Dr. Seuss', 'Don''t cry because it''s over, smile because it happened.');
-insert into quotes values (2,'Oscar Wilde', 'Be yourself; everyone else is already taken.');
-insert into quotes values (3,'Albert Einstein', 'Two things are infinite: the universe and human stupidity; and I''m not sure about the universe.');
 insert into musics values (1,'Rick Astley', 'Never gonna give you up');
+insert into musics values (2,'Justin Timberlake', 'Can''t Stop the Feeling!');
+insert into musics values (3,'Anna Kendrick', 'The Sound Of Silence');
+insert into musics values (4,'Zooey Deschanel', 'Hello');
+insert into playlists values (1, 'Fun playlist');
+insert into playlists values (2, 'Troll playlist');
+insert into playlists values (3, 'No idea what i am doing');
+insert into playlist_music values (1, 1);
+insert into playlist_music values (1, 2);
+insert into playlist_music values (2, 2);
+insert into playlist_music values (2, 3);
+insert into playlist_music values (2, 4);
+insert into playlist_music values (3, 4);

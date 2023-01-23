@@ -10,6 +10,8 @@ tags:
     description: Gestion des quotes
   - name: Musics-end-point
     description: Gestion des musics
+  - name: Playlists-end-point
+    description: Gestion des playlists
 paths:
   /musics:
     get:
@@ -26,6 +28,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Music'
+        '404':
+          description: Not Found
+  /playlists:
+    get:
+      tags:
+        - Playlists-end-point
+      summary: Obtient une liste de toute les playlists
+      operationId: getPlaylists
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Playlist'
         '404':
           description: Not Found
   /quotes:
@@ -120,3 +139,20 @@ components:
           type: integer
           format: int32
       title: Music
+    Playlist:
+      description: toutes les caractéristiques d'une playlist
+      type: object
+      properties:
+        name:
+          description: nom de la playlist
+          type: string
+        musics:
+          description: musics de la playlist
+          type: array
+          items:
+            $ref: "#/components/schemas/Music"
+        id:
+          description: numéro auto-incrémenté de la person
+          type: integer
+          format: int32
+      title: Playlist
