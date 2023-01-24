@@ -59,7 +59,7 @@ paths:
   /playlists:
     post:
       tags:
-        - Playlist-end-point
+        - Playlists-end-point
       summary: Ajoute une nouvelle playlist
       operationId: createPlaylist
       requestBody:
@@ -95,7 +95,7 @@ paths:
   /playlists/{id}/musics:
     put:
       tags:
-        - Playlist-end-point
+        - Playlists-end-point
       summary: Ajoute des musics a la playlist
       operationId: addMusicToPlaylist
       parameters:
