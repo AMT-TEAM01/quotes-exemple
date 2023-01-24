@@ -4,6 +4,7 @@ import ch.heig.quotes.api.entities.MusicEntity;
 import ch.heig.quotes.api.entities.QuoteEntity;
 import ch.heig.quotes.api.repositories.MusicRepository;
 import ch.heig.quotes.api.repositories.QuoteRepository;
+import ch.heig.quotes.api.services.MusicsService;
 import org.openapitools.api.MusicsApi;
 import org.openapitools.model.AddMusicRequest;
 import org.openapitools.model.Music;
@@ -22,33 +23,15 @@ import java.util.List;
 @RestController
 public class MusicsEndPoint implements MusicsApi {
     @Autowired
-    private MusicRepository musicRepository;
+    private MusicsService musicsService;
 
     @Override
     public ResponseEntity<List<Music>> getMusics() {
-        List<MusicEntity> musicEntities= musicRepository.findAll();
-        List<Music> musics  = new ArrayList<>();
-        for (MusicEntity musicEntity : musicEntities) {
-            Music music = new Music();
-            music.setId(musicEntity.getId());
-            music.setAuthor(musicEntity.getAuthor());
-            music.setTitle(musicEntity.getTitle());
-            musics.add(music);
-        }
-        return new ResponseEntity<List<Music>>(musics, HttpStatus.OK);
+        return new ResponseEntity<List<Music>>(musicsService.getMusics(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Void> addMusic(AddMusicRequest addMusicRequest) {
-        MusicEntity musicEntity = new MusicEntity();
-        musicEntity.setAuthor(addMusicRequest.getAuthor());
-        musicEntity.setTitle(addMusicRequest.getTitle());
-        MusicEntity quoteAdded = musicRepository.save(musicEntity);
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(quoteAdded.getId())
-                .toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(musicsService.addMusics(addMusicRequest)).build();
     }
 }
