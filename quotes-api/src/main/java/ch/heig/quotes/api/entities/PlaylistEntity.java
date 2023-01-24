@@ -1,6 +1,7 @@
 package ch.heig.quotes.api.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 import org.openapitools.model.Music;
 import org.openapitools.model.Playlist;
 
@@ -52,6 +53,10 @@ public class PlaylistEntity {
         this.name = name;
     }
 
+    public void setRelations(MusicEntity music) {
+        musicsEntities.add(music);
+    }
+
     public List<Music> getMusics() {
         List<Music> musics  = new ArrayList<>();
         for (MusicEntity musicEntity : musicsEntities) {
@@ -62,5 +67,15 @@ public class PlaylistEntity {
             musics.add(music);
         }
         return musics;
+    }
+
+    public void setMusics(List<Music> musics) {
+        for (Music music : musics) {
+            MusicEntity musicEntity = new MusicEntity();
+            musicEntity.setTitle(music.getTitle());
+            musicEntity.setAuthor(music.getAuthor());
+            musicEntity.setId(music.getId());
+            musicsEntities.add(musicEntity);
+        }
     }
 }

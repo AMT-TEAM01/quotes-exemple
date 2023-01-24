@@ -15,7 +15,7 @@ public class MusicEntity {
             table = "idMusics",
             pkColumnName = "name",
             valueColumnName = "val",
-            initialValue = 3,
+            initialValue = 4,
             allocationSize = 100)
     @Id // @GeneratedValue
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "genMusics")
@@ -32,6 +32,10 @@ public class MusicEntity {
         this.id = id;
         this.author = author;
         this.title = title;
+    }
+
+    public void setRelations(PlaylistEntity playlist) {
+        playlistsEntities.add(playlist);
     }
 
     public int getId() {

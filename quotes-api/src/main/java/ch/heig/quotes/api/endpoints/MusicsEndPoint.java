@@ -5,19 +5,19 @@ import ch.heig.quotes.api.entities.QuoteEntity;
 import ch.heig.quotes.api.repositories.MusicRepository;
 import ch.heig.quotes.api.repositories.QuoteRepository;
 import org.openapitools.api.MusicsApi;
+import org.openapitools.model.AddMusicRequest;
 import org.openapitools.model.Music;
 import org.openapitools.model.Quote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
-//table user, author creators many to many, artist
-//table playlist
-//patch change ordre playlist
 
 @RestController
 public class MusicsEndPoint implements MusicsApi {
@@ -36,5 +36,19 @@ public class MusicsEndPoint implements MusicsApi {
             musics.add(music);
         }
         return new ResponseEntity<List<Music>>(musics, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> addMusic(AddMusicRequest addMusicRequest) {
+        MusicEntity musicEntity = new MusicEntity();
+        musicEntity.setAuthor(addMusicRequest.getAuthor());
+        musicEntity.setTitle(addMusicRequest.getTitle());
+        MusicEntity quoteAdded = musicRepository.save(musicEntity);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(quoteAdded.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
     }
 }
