@@ -12,7 +12,52 @@ tags:
     description: Gestion des musics
   - name: Playlists-end-point
     description: Gestion des playlists
+  - name: Artists-end-point
+    description: Gestion des artists
 paths:
+  /artists:
+    post:
+      tags:
+        - Artists-end-point
+      summary: Ajoute une nouvelle music
+      operationId: addArtist
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                name:
+                  description: nom de l'artiste
+                  type: string
+                style:
+                  description: style de l'artiste
+                  type: string
+      responses:
+        '201':
+          description: artiste crée
+          headers:
+            Location:
+              description: URL de l'artiste crée
+              schema:
+                type: string
+                format: uri
+    get:
+      tags:
+        - Artists-end-point
+      summary: Obtient une liste de toute les artists
+      operationId: getArtists
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artist'
+        '404':
+          description: Not Found
   /musics:
     post:
       tags:
@@ -211,6 +256,10 @@ components:
         title:
           description: titre de la music
           type: string
+        artist:
+          description: artiste de la music
+          type: object
+          shc
         id:
           description: numéro auto-incrémenté de la music
           type: integer
@@ -233,3 +282,18 @@ components:
           type: integer
           format: int32
       title: Playlist
+    Artist:
+      description: toutes les caractéristiques d'un artist
+      type: object
+      properties:
+        name:
+          description: nom de l'artiste
+          type: string
+        style:
+          description: style de music de l'artiste
+          type: string
+        id:
+          description: numéro auto-incrémenté de l'artist
+          type: integer
+          format: int32
+      title: Artist

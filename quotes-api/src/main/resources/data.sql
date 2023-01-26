@@ -1,7 +1,11 @@
-insert into musics values (1,'Rick Astley', 'Never gonna give you up');
-insert into musics values (2,'Justin Timberlake', 'Can''t Stop the Feeling!');
-insert into musics values (3,'Anna Kendrick', 'The Sound Of Silence');
-insert into musics values (4,'Zooey Deschanel', 'Hello');
+insert into artists values (1, 'Rick Astley', 'Classic');
+insert into artists values (2, 'Justin Timberlake', 'Classic');
+insert into artists values (3, 'Anna Kendrick', 'Rock');
+insert into artists values (4, 'Zooey Deschanel', 'Classic');
+insert into musics values (1, 'Never gonna give you up');
+insert into musics values (2, 'Can''t Stop the Feeling!');
+insert into musics values (3, 'The Sound Of Silence');
+insert into musics values (4, 'Hello');
 insert into playlists values (1, 'Fun playlist');
 insert into playlists values (2, 'Troll playlist');
 insert into playlists values (3, 'No idea what i am doing');

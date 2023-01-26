@@ -26,6 +26,7 @@ public class MusicsService {
             music.setId(musicEntity.getId());
             music.setAuthor(musicEntity.getAuthor());
             music.setTitle(musicEntity.getTitle());
+            music.setArtist(musicEntity.getArtistEntity());
             musics.add(music);
         }
         return musics;

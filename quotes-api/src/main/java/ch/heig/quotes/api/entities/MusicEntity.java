@@ -1,6 +1,8 @@
 package ch.heig.quotes.api.entities;
 
 import jakarta.persistence.*;
+import org.openapitools.model.Artist;
+import org.openapitools.model.Music;
 import org.openapitools.model.Playlist;
 
 import java.util.ArrayList;
@@ -25,6 +27,10 @@ public class MusicEntity {
 
     @ManyToMany(mappedBy = "musicsEntities")
     private List<PlaylistEntity> playlistsEntities = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "artist_id", nullable = false)
+    private ArtistEntity artistEntity;
 
     public MusicEntity() {}
 
@@ -60,5 +66,13 @@ public class MusicEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public ArtistEntity getArtistEntity() {
+        return artistEntity;
+    }
+
+    public void setArtistEntity(ArtistEntity artistEntity) {
+        this.artistEntity = artistEntity;
     }
 }
