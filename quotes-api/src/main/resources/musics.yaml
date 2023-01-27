@@ -259,7 +259,6 @@ components:
         artist:
           description: artiste de la music
           type: object
-          shc
         id:
           description: numéro auto-incrémenté de la music
           type: integer
