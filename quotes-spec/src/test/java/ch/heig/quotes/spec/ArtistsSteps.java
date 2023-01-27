@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ArtistsSteps {
-
     private final ArtistsEndPointApi api = new ArtistsEndPointApi();
     private AddArtistRequest artist;
     private int statusCode;
