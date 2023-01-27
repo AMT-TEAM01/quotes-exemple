@@ -123,6 +123,8 @@ paths:
               schema:
                 type: string
                 format: uri
+        '404':
+          description: Not Found
     get:
       tags:
         - Musics-end-point

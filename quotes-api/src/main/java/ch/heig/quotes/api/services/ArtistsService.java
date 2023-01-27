@@ -2,6 +2,7 @@ package ch.heig.quotes.api.services;
 
 import ch.heig.quotes.api.entities.ArtistEntity;
 import ch.heig.quotes.api.entities.MusicEntity;
+import ch.heig.quotes.api.exceptions.ArtistNotFoundException;
 import ch.heig.quotes.api.repositories.ArtistRepository;
 import org.openapitools.model.AddArtistRequest;
 import org.openapitools.model.Artist;
@@ -38,8 +39,9 @@ public class ArtistsService {
     public URI modifyArtist(Integer id, ModifyArtistRequest modifyArtistRequest) {
         Optional<ArtistEntity> optionalArtistEntity = artistRepository.findById(id);
         if (optionalArtistEntity.isEmpty()) {
-            //return error
+            throw new ArtistNotFoundException(id);
         }
+
         ArtistEntity artistEntity = optionalArtistEntity.get();
         artistEntity.setStyle(modifyArtistRequest.getStyle());
         artistEntity.setName(modifyArtistRequest.getName());

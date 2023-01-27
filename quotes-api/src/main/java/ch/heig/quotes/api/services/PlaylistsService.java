@@ -2,6 +2,7 @@ package ch.heig.quotes.api.services;
 
 import ch.heig.quotes.api.entities.MusicEntity;
 import ch.heig.quotes.api.entities.PlaylistEntity;
+import ch.heig.quotes.api.exceptions.PlaylistNotFoundException;
 import ch.heig.quotes.api.repositories.MusicRepository;
 import ch.heig.quotes.api.repositories.PlaylistRepository;
 import org.openapitools.model.Playlist;
@@ -50,14 +51,14 @@ public class PlaylistsService {
     public URI addMusicToPlaylist(Integer id, List<Integer> musicIds) {
         Optional<PlaylistEntity> optionalPlaylist = playlistRepository.findById(id);
         if (optionalPlaylist.isEmpty()) {
-            //return error
+            throw new PlaylistNotFoundException(id);
         }
         PlaylistEntity playlistEntity = optionalPlaylist.get();
 
         for (Integer musicId : musicIds) {
             Optional<MusicEntity> optionalMusic = musicRepository.findById(musicId);
             if (optionalMusic.isEmpty()) {
-                //return error
+                throw new PlaylistNotFoundException(musicId);
             }
             MusicEntity musicEntity = optionalMusic.get();
             playlistEntity.setRelations(musicEntity);

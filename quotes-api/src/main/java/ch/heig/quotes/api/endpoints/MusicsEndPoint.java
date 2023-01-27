@@ -1,5 +1,6 @@
 package ch.heig.quotes.api.endpoints;
 
+import ch.heig.quotes.api.exceptions.ArtistNotFoundException;
 import ch.heig.quotes.api.services.MusicsService;
 import org.openapitools.api.MusicsApi;
 import org.openapitools.model.AddMusicRequest;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController

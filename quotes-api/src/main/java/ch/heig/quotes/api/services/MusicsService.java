@@ -2,6 +2,7 @@ package ch.heig.quotes.api.services;
 
 import ch.heig.quotes.api.entities.ArtistEntity;
 import ch.heig.quotes.api.entities.MusicEntity;
+import ch.heig.quotes.api.exceptions.ArtistNotFoundException;
 import ch.heig.quotes.api.repositories.ArtistRepository;
 import ch.heig.quotes.api.repositories.MusicRepository;
 import jdk.dynalink.linker.LinkerServices;
@@ -43,8 +44,9 @@ public class MusicsService {
 
         Optional<ArtistEntity> optionalArtistEntity = artistRepository.findById(addMusicRequest.getArtist());
         if (optionalArtistEntity.isEmpty()) {
-            //return error
+            throw new ArtistNotFoundException(addMusicRequest.getArtist());
         }
+
         ArtistEntity artistEntity = optionalArtistEntity.get();
         musicEntity.setArtistEntity(artistEntity);
         MusicEntity quoteAdded = musicRepository.save(musicEntity);
