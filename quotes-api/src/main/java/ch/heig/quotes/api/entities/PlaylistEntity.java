@@ -62,7 +62,6 @@ public class PlaylistEntity {
         for (MusicEntity musicEntity : musicsEntities) {
             Music music = new Music();
             music.setId(musicEntity.getId());
-            music.setAuthor(musicEntity.getAuthor());
             music.setTitle(musicEntity.getTitle());
             musics.add(music);
         }
@@ -73,7 +72,6 @@ public class PlaylistEntity {
         for (Music music : musics) {
             MusicEntity musicEntity = new MusicEntity();
             musicEntity.setTitle(music.getTitle());
-            musicEntity.setAuthor(music.getAuthor());
             musicEntity.setId(music.getId());
             musicsEntities.add(musicEntity);
         }

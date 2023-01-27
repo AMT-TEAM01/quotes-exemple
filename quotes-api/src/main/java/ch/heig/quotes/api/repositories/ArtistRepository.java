@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ArtistRepository extends JpaRepository<ArtistEntity, Integer> {
-    ArtistEntity findById(int id);
-    List<ArtistEntity> findByNameLike(String pattern);}
+    ArtistEntity findById(int id);}

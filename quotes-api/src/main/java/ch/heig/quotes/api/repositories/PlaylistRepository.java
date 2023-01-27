@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PlaylistRepository extends JpaRepository<PlaylistEntity, Integer> {
-    PlaylistEntity findById(int id);
-    List<PlaylistEntity> findByNameLike(String pattern);}
+    PlaylistEntity findById(int id);}

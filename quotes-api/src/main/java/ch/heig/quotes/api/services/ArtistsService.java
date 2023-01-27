@@ -5,6 +5,7 @@ import ch.heig.quotes.api.entities.MusicEntity;
 import ch.heig.quotes.api.repositories.ArtistRepository;
 import org.openapitools.model.AddArtistRequest;
 import org.openapitools.model.Artist;
+import org.openapitools.model.ModifyArtistRequest;
 import org.openapitools.model.Music;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArtistsService {
@@ -29,6 +31,24 @@ public class ArtistsService {
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(quoteAdded.getId())
+                .toUri();
+        return uri;
+    }
+
+    public URI modifyArtist(Integer id, ModifyArtistRequest modifyArtistRequest) {
+        Optional<ArtistEntity> optionalArtistEntity = artistRepository.findById(id);
+        if (optionalArtistEntity.isEmpty()) {
+            //return error
+        }
+        ArtistEntity artistEntity = optionalArtistEntity.get();
+        artistEntity.setStyle(modifyArtistRequest.getStyle());
+        artistEntity.setName(modifyArtistRequest.getName());
+        artistEntity = artistRepository.save(artistEntity);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(artistEntity.getId())
                 .toUri();
         return uri;
     }

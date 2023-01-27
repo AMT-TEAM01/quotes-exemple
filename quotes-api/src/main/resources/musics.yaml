@@ -58,6 +58,43 @@ paths:
                   $ref: '#/components/schemas/Artist'
         '404':
           description: Not Found
+  /artists/{id}:
+    patch:
+      tags:
+        - Artists-end-point
+      summary: Modifie l'artist
+      operationId: modifyArtist
+      parameters:
+        - name: id
+          in: path
+          description: numéro de l'artist a modifier
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                name:
+                  description: nom de l'artist
+                  type: string
+                style:
+                  description: style de l'artist
+                  type: string
+      responses:
+        '200':
+          description: artist modifier
+          headers:
+            Location:
+              description: URL de l'artiste modifier
+              schema:
+                type: string
+                format: uri
+        '404':
+          description: Not Found
   /musics:
     post:
       tags:
@@ -70,9 +107,10 @@ paths:
             schema:
               type: object
               properties:
-                author:
-                  description: auteur de la music
-                  type: string
+                artist:
+                  description: id de l'artiste
+                  type: integer
+                  format: int32
                 title:
                   description: titre de la music
                   type: string
@@ -169,90 +207,12 @@ paths:
                 type: string
                 format: uri
       deprecated: false
-  /quotes:
-    get:
-      tags:
-        - Quotes-end-point
-      summary: Obtient une liste de toutes les quotes
-      operationId: getQuotes
-      responses:
-        '200':
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Quote'
-        '404':
-          description: Not Found
-    post:
-      tags:
-        - Quotes-end-point
-      summary: Ajoute une nouvelle quote
-      operationId: addQuote
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Quote'
-      responses:
-        '201':
-          description: quote crée
-          headers:
-            Location:
-              description: URL de la quote crée
-              schema:
-                type: string
-                format: uri
-  /quotes/{id}:
-    get:
-      tags:
-        - Quotes-end-point
-      summary: Obtient une quote
-      operationId: getQuote
-      parameters:
-        - name: id
-          in: path
-          description: numéro de la quote à obtenir
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Quote'
-        '404':
-          description: Not Found
-      deprecated: false
 components:
   schemas:
-    Quote:
-      description: toutes les caractéristiques d'une quote
-      type: object
-      properties:
-        author:
-          description: nom de l'auteur
-          type: string
-        citation:
-          description: phrase de la citation
-          type: string
-        id:
-          description: numéro auto-incrémenté de la citation
-          type: integer
-          format: int32
-      title: Quote
     Music:
       description: toutes les caractéristiques d'une music
       type: object
       properties:
-        author:
-          description: nom de l'auteur
-          type: string
         title:
           description: titre de la music
           type: string
