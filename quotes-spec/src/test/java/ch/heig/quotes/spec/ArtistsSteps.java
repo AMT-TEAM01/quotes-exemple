@@ -17,11 +17,6 @@ public class ArtistsSteps {
     private AddArtistRequest artist;
     private int statusCode;
 
-    @Then("I receive a {int} status code")
-    public void i_receive_a_status_code(int arg1) throws Throwable {
-        assertEquals(arg1, statusCode);
-    }
-
     @Given("I have an artist payload")
     public void iHaveAnArtistPayload() {
         artist = new AddArtistRequest();
@@ -37,5 +32,10 @@ public class ArtistsSteps {
         } catch (ApiException e) {
             statusCode = e.getCode();
         }
+    }
+
+    @Then("I receive a {int} status code for artists endpoint")
+    public void i_receive_a_status_code_for_artists_endpoint(Integer int1) {
+        assertEquals(int1, statusCode);
     }
 }

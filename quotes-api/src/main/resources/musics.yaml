@@ -200,7 +200,7 @@ paths:
                 type: integer
                 format: int32
       responses:
-        '200':
+        '201':
           description: playlist update
           headers:
             Location:
@@ -208,6 +208,8 @@ paths:
               schema:
                 type: string
                 format: uri
+        '404':
+          description: Not Found
       deprecated: false
 components:
   schemas:

@@ -32,8 +32,8 @@ public class MusicsSteps {
         musicRequest.setTitle(arg1);
     }
 
-    @Then("I receive a {int} status code")
-    public void i_receive_a_status_code(int arg1) throws Throwable {
-        assertEquals(arg1, statusCode);
+    @Then("I receive a {int} status code for musics endpoint")
+    public void iReceiveAStatusStatusCodeForMusicsEndpoint(Integer arg0) {
+        assertEquals(arg0, statusCode);
     }
 }
