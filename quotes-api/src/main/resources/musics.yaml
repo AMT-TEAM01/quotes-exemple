@@ -103,10 +103,10 @@ paths:
                   type: string
       responses:
         '201':
-          description: music crée
+          description: Morceau de musique crée avec succès.
           headers:
             Location:
-              description: URL de la music crée
+              description: URL du morceau de musique crée.
               schema:
                 type: string
                 format: uri
