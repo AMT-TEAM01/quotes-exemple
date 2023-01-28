@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.sl.In;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
-import org.openapitools.client.api.PlaylistsEndPointApi;
+import org.openapitools.client.api.PlaylistsApi;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlaylistsSteps {
-    private final PlaylistsEndPointApi api = new PlaylistsEndPointApi();
+    private final PlaylistsApi api = new PlaylistsApi();
     private List<Integer> musics;
     private Integer playlist;
     private int statusCode;

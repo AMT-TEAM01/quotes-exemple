@@ -5,13 +5,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
-import org.openapitools.client.api.MusicsEndPointApi;
+import org.openapitools.client.api.MusicsApi;
 import org.openapitools.client.model.AddMusicRequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MusicsSteps {
-    private final MusicsEndPointApi api = new MusicsEndPointApi();
+    private final MusicsApi api = new MusicsApi();
     private AddMusicRequest musicRequest;
     private int statusCode;
 

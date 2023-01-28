@@ -5,21 +5,10 @@ info:
   title: Api Documentation
 servers:
   - url: 'http://localhost:9090/api'
-tags:
-  - name: Quotes-end-point
-    description: Gestion des quotes
-  - name: Musics-end-point
-    description: Gestion des musics
-  - name: Playlists-end-point
-    description: Gestion des playlists
-  - name: Artists-end-point
-    description: Gestion des artists
 paths:
   /artists:
     post:
-      tags:
-        - Artists-end-point
-      summary: Ajoute une nouvelle music
+      summary: Ajoute un nouvel artiste.
       operationId: addArtist
       requestBody:
         content:
@@ -28,24 +17,24 @@ paths:
               type: object
               properties:
                 name:
-                  description: nom de l'artiste
+                  description: Nom de l'artiste.
                   type: string
                 style:
-                  description: style de l'artiste
+                  description: Style musical de l'artiste.
                   type: string
       responses:
         '201':
-          description: artiste crée
+          description: Artiste crée avec succès.
           headers:
             Location:
-              description: URL de l'artiste crée
+              description: URL de l'artiste crée.
               schema:
                 type: string
                 format: uri
+        '400':
+          description: Bad Request
     get:
-      tags:
-        - Artists-end-point
-      summary: Obtient une liste de toute les artists
+      summary: Obtient une liste de tous les artistes sauvegardés.
       operationId: getArtists
       responses:
         '200':
@@ -60,14 +49,12 @@ paths:
           description: Not Found
   /artists/{id}:
     patch:
-      tags:
-        - Artists-end-point
-      summary: Modifie l'artist
+      summary: Modifie les attributs d'un artiste donné.
       operationId: modifyArtist
       parameters:
         - name: id
           in: path
-          description: numéro de l'artist a modifier
+          description: Identifiant de l'artiste à modifier.
           required: true
           schema:
             type: integer
@@ -79,27 +66,27 @@ paths:
               type: object
               properties:
                 name:
-                  description: nom de l'artist
+                  description: Nom de l'artiste.
                   type: string
                 style:
-                  description: style de l'artist
+                  description: Style musical de l'artiste
                   type: string
       responses:
         '200':
-          description: artist modifier
+          description: Les attributs de l'artiste ont été modifié avec succès.
           headers:
             Location:
-              description: URL de l'artiste modifier
+              description: URL de l'artiste modifié.
               schema:
                 type: string
                 format: uri
+        '400':
+          description: Bad Request
         '404':
           description: Not Found
   /musics:
     post:
-      tags:
-        - Musics-end-point
-      summary: Ajoute une nouvelle music
+      summary: Ajoute un nouveau morceau de musique.
       operationId: addMusic
       requestBody:
         content:
@@ -108,11 +95,11 @@ paths:
               type: object
               properties:
                 artist:
-                  description: id de l'artiste
+                  description: Identifiant de l'artiste.
                   type: integer
                   format: int32
                 title:
-                  description: titre de la music
+                  description: Titre du morceau de music.
                   type: string
       responses:
         '201':
@@ -123,12 +110,12 @@ paths:
               schema:
                 type: string
                 format: uri
+        '400':
+          description: Bad Request
         '404':
           description: Not Found
     get:
-      tags:
-        - Musics-end-point
-      summary: Obtient une liste de toute les musics
+      summary: Obtient une liste de tous les morceaux de musique sauvegardés.
       operationId: getMusics
       responses:
         '200':
@@ -139,13 +126,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Music'
+        '400':
+          description: Bad Request
         '404':
           description: Not Found
   /playlists:
     post:
-      tags:
-        - Playlists-end-point
-      summary: Ajoute une nouvelle playlist
+      summary: Ajoute une nouvelle playlist.
       operationId: createPlaylist
       requestBody:
         content:
@@ -154,17 +141,17 @@ paths:
               type: string
       responses:
         '201':
-          description: playlist crée
+          description: Playlist crée avec succès.
           headers:
             Location:
               description: URL de la music playlist
               schema:
                 type: string
                 format: uri
+        '400':
+          description: Bad Request
     get:
-      tags:
-        - Playlists-end-point
-      summary: Obtient une liste de toute les playlists
+      summary: Obtient une liste de toutes les playlists.
       operationId: getPlaylists
       responses:
         '200':
@@ -179,14 +166,12 @@ paths:
           description: Not Found
   /playlists/{id}/musics:
     put:
-      tags:
-        - Playlists-end-point
-      summary: Ajoute des musics a la playlist
+      summary: Ajoute un ou plusieurs morceaux de musique dans une playlist.
       operationId: addMusicToPlaylist
       parameters:
         - name: id
           in: path
-          description: numéro de la playlist a modifier
+          description: Identifiant de la playlist a modifier.
           required: true
           schema:
             type: integer
@@ -201,62 +186,64 @@ paths:
                 format: int32
       responses:
         '201':
-          description: playlist update
+          description: La playlist a été mise à jour avec succès.
           headers:
             Location:
               description: URL de la playlist
               schema:
                 type: string
                 format: uri
+        '400':
+          description: Bad Request
         '404':
           description: Not Found
       deprecated: false
 components:
   schemas:
     Music:
-      description: toutes les caractéristiques d'une music
+      description: Ensemble de caractéristiques d'un morceau de musique.
       type: object
       properties:
         title:
-          description: titre de la music
+          description: Titre du morceau de musique.
           type: string
         artist:
-          description: artiste de la music
+          description: Artiste ayant composé le morceau de musique.
           type: object
         id:
-          description: numéro auto-incrémenté de la music
+          description: Identifiant auto-incrémenté du morceau de musique.
           type: integer
           format: int32
-      title: Music
+      title: Musics
     Playlist:
-      description: toutes les caractéristiques d'une playlist
+      description: Ensemble de caractéristiques d'une playlist.
       type: object
       properties:
         name:
-          description: nom de la playlist
+          description: Mom de la playlist
           type: string
         musics:
-          description: musics de la playlist
+          description: Morceaux de musique dans la playlist.
           type: array
           items:
             $ref: "#/components/schemas/Music"
         id:
-          description: numéro auto-incrémenté de la person
+          description: Identifiant auto-incrémenté d'une personne.
           type: integer
           format: int32
-      title: Playlist
+      title: Playlists
     Artist:
-      description: toutes les caractéristiques d'un artist
+      description: Ensemble de caractéristiques d'un artiste.
       type: object
       properties:
         name:
-          description: nom de l'artiste
+          description: Nom de l'artiste.
           type: string
         style:
-          description: style de music de l'artiste
+          description: Style de musique de l'artiste.
           type: string
         id:
-          description: numéro auto-incrémenté de l'artist
+          description: Identifiant auto-incrémenté de l'artiste.
           type: integer
           format: int32
-      title: Artist
+      title: Artists

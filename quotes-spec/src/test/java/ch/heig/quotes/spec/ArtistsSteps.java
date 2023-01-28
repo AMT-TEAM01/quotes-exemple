@@ -5,15 +5,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
-import org.openapitools.client.api.ArtistsEndPointApi;
-import org.openapitools.client.api.PlaylistsEndPointApi;
+import org.openapitools.client.api.ArtistsApi;
 import org.openapitools.client.model.AddArtistRequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ArtistsSteps {
-    private final ArtistsEndPointApi api = new ArtistsEndPointApi();
+    private final ArtistsApi api = new ArtistsApi();
     private AddArtistRequest artist;
     private int statusCode;
 
