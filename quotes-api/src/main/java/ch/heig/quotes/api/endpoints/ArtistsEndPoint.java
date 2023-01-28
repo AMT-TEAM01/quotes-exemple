@@ -22,7 +22,10 @@ public class ArtistsEndPoint implements ArtistsApi {
     @Autowired
     private ArtistsService artistsService;
     @Override
-    public ResponseEntity addArtist(AddArtistRequest addArtistRequest) {
+    public ResponseEntity<Void> addArtist(AddArtistRequest addArtistRequest) {
+        if (addArtistRequest == null || addArtistRequest.getName() == null || addArtistRequest.getStyle() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.created(artistsService.addArtist(addArtistRequest)).build();
     }
 
@@ -33,8 +36,13 @@ public class ArtistsEndPoint implements ArtistsApi {
 
     @Override
     public ResponseEntity<Void> modifyArtist(Integer id, ModifyArtistRequest modifyArtistRequest) {
+            if (id == null || modifyArtistRequest == null ||
+                    modifyArtistRequest.getName() == null && modifyArtistRequest.getStyle() == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(artistsService.modifyArtist(id, modifyArtistRequest));
-            return new ResponseEntity(headers, HttpStatus.OK);
+            return new ResponseEntity<>(headers, HttpStatus.OK);
     }
+
 }

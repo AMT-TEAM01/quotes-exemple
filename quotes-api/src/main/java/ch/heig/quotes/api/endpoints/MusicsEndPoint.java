@@ -25,6 +25,9 @@ public class MusicsEndPoint implements MusicsApi {
 
     @Override
     public ResponseEntity<Void> addMusic(AddMusicRequest addMusicRequest) {
+        if (addMusicRequest == null || addMusicRequest.getArtist() == null || addMusicRequest.getTitle() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.created(musicsService.addMusics(addMusicRequest)).build();
     }
 }

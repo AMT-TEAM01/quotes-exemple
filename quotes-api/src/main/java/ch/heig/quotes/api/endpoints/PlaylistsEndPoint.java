@@ -31,11 +31,17 @@ public class PlaylistsEndPoint implements PlaylistsApi {
 
     @Override
     public ResponseEntity<Void> createPlaylist(@RequestBody String name) {
+        if (name == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.created(playlistsService.createPlaylist(name)).build();
     }
 
     @Override
     public ResponseEntity<Void> addMusicToPlaylist(Integer id, @RequestBody List<Integer> musicIds) {
+        if (id == null || musicIds == null || musicIds.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.created(playlistsService.addMusicToPlaylist(id, musicIds)).build();
     }
 }
