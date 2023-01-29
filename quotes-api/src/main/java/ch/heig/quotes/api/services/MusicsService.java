@@ -7,6 +7,7 @@ import ch.heig.quotes.api.repositories.ArtistRepository;
 import ch.heig.quotes.api.repositories.MusicRepository;
 import jdk.dynalink.linker.LinkerServices;
 import org.openapitools.model.AddMusicRequest;
+import org.openapitools.model.Artist;
 import org.openapitools.model.ModifyArtistRequest;
 import org.openapitools.model.Music;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,24 @@ public class MusicsService {
     @Autowired
     private ArtistRepository artistRepository;
 
-    public List<Music> getMusics() {
-        List<MusicEntity> musicEntities= musicRepository.findAll();
+    public List<Music> getMusics(){
+        return getMusics(musicRepository.findAll());
+    }
+
+    public static List<Music> getMusics(List<MusicEntity> musicEntities){
         List<Music> musics  = new ArrayList<>();
         for (MusicEntity musicEntity : musicEntities) {
             Music music = new Music();
             music.setId(musicEntity.getId());
             music.setTitle(musicEntity.getTitle());
-            music.setArtist(musicEntity.getArtistEntity());
+
+            var artEnt = musicEntity.getArtistEntity();
+            Artist art = new Artist();
+            art.setId(artEnt.getId());
+            art.setStyle(artEnt.getStyle());
+            art.setName(artEnt.getName());
+
+            music.setArtist(art);
             musics.add(music);
         }
         return musics;
