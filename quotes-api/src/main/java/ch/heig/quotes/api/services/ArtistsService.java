@@ -43,8 +43,14 @@ public class ArtistsService {
         }
 
         ArtistEntity artistEntity = optionalArtistEntity.get();
-        artistEntity.setStyle(modifyArtistRequest.getStyle());
-        artistEntity.setName(modifyArtistRequest.getName());
+        if (modifyArtistRequest.getStyle() != null ) {
+            artistEntity.setStyle(modifyArtistRequest.getStyle());
+        }
+
+        if (modifyArtistRequest.getName() != null) {
+            artistEntity.setName(modifyArtistRequest.getName());
+        }
+
         artistEntity = artistRepository.save(artistEntity);
 
         URI uri = ServletUriComponentsBuilder
