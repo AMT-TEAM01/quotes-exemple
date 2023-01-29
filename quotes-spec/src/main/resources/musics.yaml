@@ -160,6 +160,8 @@ paths:
                 format: uri
         '400':
           description: Bad Request
+        '409':
+          description: Playliste déjà présente dans la base de donnée
     get:
       tags:
         - Playlists

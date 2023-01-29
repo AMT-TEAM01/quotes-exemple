@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class MusicNotFoundException extends RuntimeException {
     public MusicNotFoundException(Integer id) {
-        super("Music " + id + " non trouvée");
+        super("Morceau de musique " + id + " non trouvé.");
     }
 }

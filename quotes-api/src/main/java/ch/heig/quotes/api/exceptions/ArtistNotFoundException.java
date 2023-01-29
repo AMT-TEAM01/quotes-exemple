@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ArtistNotFoundException extends RuntimeException {
     public ArtistNotFoundException(Integer id) {
-        super("Artist " + id + " non trouvée");
+        super("Artiste " + id + " non trouvé.");
     }
 }
 

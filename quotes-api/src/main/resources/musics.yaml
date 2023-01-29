@@ -150,6 +150,8 @@ paths:
                 format: uri
         '400':
           description: Bad Request
+        '409':
+          description: Playliste déjà présente dans la base de donnée
     get:
       summary: Obtient une liste de toutes les playlists.
       operationId: getPlaylists

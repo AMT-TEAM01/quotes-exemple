@@ -2,6 +2,7 @@ package ch.heig.quotes.api.services;
 
 import ch.heig.quotes.api.entities.MusicEntity;
 import ch.heig.quotes.api.entities.PlaylistEntity;
+import ch.heig.quotes.api.exceptions.PlaylistExistsException;
 import ch.heig.quotes.api.exceptions.PlaylistNotFoundException;
 import ch.heig.quotes.api.repositories.MusicRepository;
 import ch.heig.quotes.api.repositories.PlaylistRepository;
@@ -37,6 +38,10 @@ public class PlaylistsService {
     }
 
     public URI createPlaylist(String name) {
+        var test = playlistRepository.findByName(name);
+        if (test != null) {
+            throw new PlaylistExistsException(name);
+        }
         PlaylistEntity playlistEntity = new PlaylistEntity();
         playlistEntity.setName(name);
         PlaylistEntity quoteAdded = playlistRepository.save(playlistEntity);
