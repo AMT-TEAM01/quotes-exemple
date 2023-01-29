@@ -1,3 +1,5 @@
+# Lien de la video
+https://www.youtube.com/watch?v=wiScfflnVy8
 # quotes-exemple
 Mise en oeuvre d'une api avec Springboot et d'un client de test BDD avec Cucumber 
 Avec OpenApi generator, génération à partir d'un fichier OpenAPI "quotes.yaml" :
