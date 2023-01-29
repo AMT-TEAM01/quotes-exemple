@@ -65,6 +65,11 @@ public class PlaylistsService {
             if (optionalMusic.isEmpty()) {
                 throw new PlaylistNotFoundException(musicId);
             }
+
+            if (isMusicPresent(musicId, playlistEntity)) {
+                continue;
+            }
+
             MusicEntity musicEntity = optionalMusic.get();
             playlistEntity.setRelations(musicEntity);
             musicEntity.setRelations(playlistEntity);
@@ -77,5 +82,14 @@ public class PlaylistsService {
                 .buildAndExpand(id)
                 .toUri();
         return uri;
+    }
+
+    private boolean isMusicPresent(Integer id, PlaylistEntity playlist) {
+        for (int i = 0; i < playlist.getMusics().size(); i++) {
+            if (id.intValue() == playlist.getMusics().get(i).getId().intValue()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
